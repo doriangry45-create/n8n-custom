@@ -1,4 +1,4 @@
-FROM n8n/n8n:latest
+FROM n8nio/n8n:latest
 
 # sportradar-unofficial kütüphanesini kur
 RUN pip install sportradar-unofficial
