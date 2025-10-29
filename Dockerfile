@@ -24,3 +24,4 @@ RUN echo "=== PYTHON PATHS ===" && \
 USER node
 
 CMD ["n8n", "start"]
+# Trigger workflow run
