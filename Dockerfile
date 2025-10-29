@@ -1,13 +1,21 @@
 FROM n8nio/n8n:latest
 
-# Gerekli paketleri kur (python3, pip)
+# Root ol
 USER root
-RUN apk add --no-cache python3 py3-pip
 
-# pip ile kütüphaneyi kur
-RUN pip3 install sportradar-unofficial
+# Python3 + pip + venv kur
+RUN apk add --no-cache python3 py3-pip py3-virtualenv
 
-# Kullanıcıyı n8n'e geri döndür
+# Virtual environment oluştur
+RUN python3 -m venv /opt/venv
+
+# Virtual environment'i aktif et + kütüphaneyi kur
+RUN /opt/venv/bin/pip install sportradar-unofficial
+
+# n8n'in PATH'ine venv ekle
+ENV PATH="/opt/venv/bin:$PATH"
+
+# Kullanıcıyı node'a döndür
 USER node
 
 # n8n'i başlat
