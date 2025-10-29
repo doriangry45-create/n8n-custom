@@ -9,11 +9,14 @@ RUN apk add --no-cache python3 py3-pip py3-virtualenv
 # Virtual environment oluştur
 RUN python3 -m venv /opt/venv
 
-# Virtual environment'i aktif et + kütüphaneyi kur
+# Kütüphaneyi venv'e kur
 RUN /opt/venv/bin/pip install sportradar-unofficial
 
-# n8n'in PATH'ine venv ekle
+# n8n'in çalışacağı ortamda PATH'i ayarla
 ENV PATH="/opt/venv/bin:$PATH"
+
+# n8n'in PYTHONPATH'ini de ayarla (garanti olsun)
+ENV PYTHONPATH="/opt/venv/lib/python3.*/site-packages:$PYTHONPATH"
 
 # Kullanıcıyı node'a döndür
 USER node
